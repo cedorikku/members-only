@@ -1,6 +1,6 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
-import db from '../db/query.js';
+import db from '../config/query.js';
 import { body, validationResult } from 'express-validator';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));

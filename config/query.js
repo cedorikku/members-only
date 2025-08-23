@@ -7,7 +7,6 @@ const getUserByUsername = async (username) => {
         WHERE username = $1
     `;
     const { rows } = await pool.query(query, [username]);
-
     return rows[0];
 };
 
