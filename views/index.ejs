@@ -9,23 +9,27 @@
     <body>
         <!-- Include navbar for logging in and signing up -->
         <nav>
-            <a href="/">Home</a>
+            <a href="/">Posts</a>
             <a href="/login">Login</a>
-            <a href="/signup">Sign Up</a>
+            <a href="/sign-up">Sign Up</a>
         </nav>
 
         <h1>Posts</h1>
 
         <div id="posts">
             <% if (locals.posts) { %> <% posts.forEach(post => { %>
+            <% const createdAt = post.created_at.toDateString(); %>
             <div class="post">
-                <h2>
-                    <%= post.title %>
-                </h2>
+                <div>
+                    <h3>
+                        <%= post.title %>
+                    </h3>
+                </div>
                 <p><%= post.content %></p>
                 <small>
-                    Posted on
-                    <%= post.createdAt.toDateString() %>
+                    <%= `${post.firstname} ${post.lastname} @${post.username}` %>
+                    | Posted on
+                    <%= createdAt %>
                 </small>
             </div>
             <% }) %>
