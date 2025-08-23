@@ -1,0 +1,27 @@
+{
+    "name": "template",
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "start": "node app.js",
+        "dev": "node --watch app.js",
+        "lint": "eslint .",
+        "format:write": "prettier --write . --plugin=prettier-plugin-ejs",
+        "format:check": "prettier --check ."
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.19.0",
+        "eslint": "^9.19.0",
+        "eslint-config-prettier": "^10.0.1",
+        "globals": "^15.14.0",
+        "prettier": "3.4.2",
+        "prettier-plugin-ejs": "^1.0.3"
+    },
+    "author": "Cedric",
+    "dependencies": {
+        "dotenv": "^17.2.1",
+        "ejs": "^3.1.10",
+        "express": "^5.1.0",
+        "express-validator": "^7.2.1"
+    }
+}
