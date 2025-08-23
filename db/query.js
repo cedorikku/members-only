@@ -1,4 +1,15 @@
 import pool from './pool.js';
+import bcrypt from 'bcryptjs';
+
+const getUserByUsername = async (username) => {
+    const query = `
+        SELECT username FROM users
+        WHERE username = $1
+    `;
+    const { rows } = await pool.query(query, [username]);
+
+    return rows[0];
+};
 
 const getAllPosts = async (order = 'desc') => {
     // TODO: Add pagination
@@ -12,4 +23,13 @@ const getAllPosts = async (order = 'desc') => {
     return rows;
 };
 
-export default { getAllPosts };
+const createUser = async (username, firstname, lastname, password) => {
+    const hashedPassword = await bcrypt.hash(password, 15);
+    const query = `
+        INSERT INTO users (username, firstname, lastname, password)
+        VALUES ($1, $2, $3, $4)
+    `;
+    await pool.query(query, [username, firstname, lastname, hashedPassword]);
+};
+
+export default { getUserByUsername, getAllPosts, createUser };
