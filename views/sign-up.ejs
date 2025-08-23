@@ -17,25 +17,49 @@
         <h1>Sign Up</h1>
 
         <form action="/sign-up" method="POST">
-            <div class="input-group">
+            <!-- prettier-ignore -->
+            <% let usernameValid = true %>
+            <% let firstnameValid = true %>
+            <% let lastnameValid = true %>
+            <% let passwordValid = true %>
+
+            <% if (locals.errors) { %>
+            <% usernameValid = (errors.username) ? false : true %>
+            <% firstnameValid = (errors.firstname) ? false : true %>
+            <% lastnameValid = (errors.lastname) ? false : true %>
+            <% passwordValid = (errors.password) ? false : true %>
+            <% } %>
+
+            <div class="input-group <%= !usernameValid ? 'invalid' : '' %>">
                 <label for="username">Username</label>
                 <input type="text" name="username" placeholder="Username" />
+                <% if (!usernameValid) { %>
+                <small class="error"><%= errors.username.msg %></small>
+                <% } %>
             </div>
 
-            <div class="input-group">
+            <div class="input-group <%= !firstnameValid ? 'invalid' : '' %>">
                 <label for="firstname">First Name</label>
                 <input type="text" name="firstname" placeholder="First Name" />
+                <% if (!firstnameValid) { %>
+                <small class="error"><%= errors.firstname.msg %></small>
+                <% } %>
             </div>
 
-            <div class="input-group">
+            <div class="input-group <%= !passwordValid ? 'invalid' : '' %>">
                 <label for="lastname">Last Name</label>
                 <input type="text" name="lastname" placeholder="Last Name" />
+                <% if (!lastnameValid) { %>
+                <small class="error"><%= errors.lastname.msg %></small>
+                <% } %>
             </div>
 
-            <div class="input-group">
+            <div class="input-group <%= !passwordValid ? 'invalid' : '' %>">
                 <label for="password">Password</label>
                 <input type="password" name="password" placeholder="Password" />
-                <p id="passwordError"></p>
+                <% if (!passwordValid) { %>
+                <small class="error"><%= errors.password.msg %></small>
+                <% } %>
             </div>
 
             <button type="submit">Sign Up</button>
