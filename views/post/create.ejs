@@ -12,7 +12,7 @@
 
         <% let titleValid = true; %>
         <% if (locals.errors) { %>
-        <% titleValid = (errors.title) ? false : true; %>
+        <% titleValid = !errors.title; %>
         <% } %>
 
         <h1>Create post</h1>

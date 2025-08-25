@@ -20,11 +20,11 @@
             <% let confirmPasswordValid = true %>
 
             <% if (locals.errors) { %>
-            <% usernameValid = (errors.username) ? false : true %>
-            <% firstnameValid = (errors.firstname) ? false : true %>
-            <% lastnameValid = (errors.lastname) ? false : true %>
-            <% passwordValid = (errors.password) ? false : true %>
-            <% confirmPasswordValid = (errors.confirmPassword) ? false : true %>
+            <% usernameValid = !errors.username %>
+            <% firstnameValid = !errors.firstname %>
+            <% lastnameValid = !errors.lastname %>
+            <% passwordValid = !errors.password %>
+            <% confirmPasswordValid = !errors.confirmPassword %>
             <% } %>
 
             <div class="input-group <%= !usernameValid ? 'invalid' : '' %>">

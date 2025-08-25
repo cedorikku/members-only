@@ -17,8 +17,8 @@
             <% let usernameValid = true %>
             <% let passwordValid = true %>
             <% if (locals.errors) { %>
-            <% usernameValid = (errors.username) ? false : true %>
-            <% passwordValid = (errors.password) ? false : true %>
+            <% usernameValid = !errors.username %>
+            <% passwordValid = !errors.password %>
             <% } %>
 
             <div class="input-group <%= isInvalid ? 'invalid' : '' %>">
