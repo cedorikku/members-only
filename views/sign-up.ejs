@@ -7,12 +7,7 @@
     </head>
 
     <body>
-        <!-- Include navbar for logging in and signing up -->
-        <nav>
-            <a href="/">Posts</a>
-            <a href="/login">Login</a>
-            <a href="/sign-up">Sign Up</a>
-        </nav>
+        <%- include('./partials/navbar.ejs') %>
 
         <h1>Sign Up</h1>
 
@@ -65,9 +60,6 @@
             <button type="submit">Sign Up</button>
         </form>
 
-        <!-- Include footer placeholder -->
-        <footer>
-            <p>&copy; 2025 A Website</p>
-        </footer>
+        <%- include('./partials/footer.ejs') %>
     </body>
 </html>

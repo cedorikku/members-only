@@ -7,16 +7,7 @@
     </head>
 
     <body>
-        <!-- Include navbar for logging in and signing up -->
-        <nav>
-            <a href="/">Posts</a>
-            <% if (!locals.currentUser) { %>
-            <a href="/login">Login</a>
-            <a href="/sign-up">Sign Up</a>
-            <% } else { %>
-            <a href="/logout">Logout</a>
-            <% } %>
-        </nav>
+        <%- include('./partials/navbar.ejs') %>
 
         <h1>Posts</h1>
 
@@ -42,9 +33,6 @@
             <% } %>
         </div>
 
-        <!-- Include footer placeholder -->
-        <footer>
-            <p>&copy; 2025 A Website</p>
-        </footer>
+        <%- include('./partials/footer.ejs') %>
     </body>
 </html>
