@@ -1,9 +1,18 @@
 import pool from './pool.js';
 import bcrypt from 'bcryptjs';
 
+const getUserById = async (id) => {
+    const query = `
+        SELECT * FROM users
+        WHERE id = $1
+    `;
+    const { rows } = await pool.query(query, [id]);
+    return rows[0];
+};
+
 const getUserByUsername = async (username) => {
     const query = `
-        SELECT username FROM users
+        SELECT * FROM users
         WHERE username = $1
     `;
     const { rows } = await pool.query(query, [username]);
@@ -31,4 +40,4 @@ const createUser = async (username, firstname, lastname, password) => {
     await pool.query(query, [username, firstname, lastname, hashedPassword]);
 };
 
-export default { getUserByUsername, getAllPosts, createUser };
+export default { getUserById, getUserByUsername, getAllPosts, createUser };

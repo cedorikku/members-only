@@ -2,12 +2,17 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import db from '../config/query.js';
 import { body, validationResult } from 'express-validator';
+import passport from '../config/passport.js';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const getIndex = async (req, res) => {
     const posts = await db.getAllPosts('desc');
     res.render('index', { posts: posts });
+};
+
+const getLogin = async (req, res) => {
+    res.render('login');
 };
 
 const getSignUp = async (req, res) => {
@@ -26,7 +31,7 @@ const lengthErr = (min, max) => {
     }
 };
 
-const validateUser = [
+const validateUserSignUp = [
     body('username')
         .trim()
         .isLength({ min: 3, max: 50 })
@@ -57,8 +62,38 @@ const validateUser = [
         .withMessage(`Password ${lengthErr(8, 255)}`),
 ];
 
+const validateUserLogin = [
+    body('username').trim().notEmpty().withMessage('Username is required.'),
+    body('password').trim().notEmpty().withMessage('Password is required.'),
+];
+
+const loginPost = [
+    validateUserLogin,
+    async (req, res, next) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).render('login', {
+                errors: errors.mapped(),
+            });
+        }
+        passport.authenticate('local', (err, user) => {
+            if (err) return next(err);
+            if (!user) {
+                return res.status(401).render('login', {
+                    loginError: 'Invalid login credentials',
+                });
+            }
+
+            req.login(user, (err) => {
+                if (err) return next(err);
+                res.redirect('/');
+            });
+        })(req, res, next);
+    },
+];
+
 const signUpPost = [
-    validateUser,
+    validateUserSignUp,
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -73,4 +108,14 @@ const signUpPost = [
     },
 ];
 
-export default { getIndex, getSignUp, signUpPost };
+const logout = (req, res, next) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+    });
+
+    res.redirect('/');
+};
+
+export default { getIndex, getLogin, loginPost, getSignUp, signUpPost, logout };

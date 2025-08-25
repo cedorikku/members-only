@@ -10,8 +10,12 @@
         <!-- Include navbar for logging in and signing up -->
         <nav>
             <a href="/">Posts</a>
+            <% if (!locals.currentUser) { %>
             <a href="/login">Login</a>
             <a href="/sign-up">Sign Up</a>
+            <% } else { %>
+            <a href="/logout">Logout</a>
+            <% } %>
         </nav>
 
         <h1>Posts</h1>
