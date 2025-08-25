@@ -10,14 +10,14 @@ const preventAuthenticated = (req, res, next) => {
 const getLogin = [
     preventAuthenticated,
     async (req, res) => {
-        res.render('login');
+        res.render('account/login');
     },
 ];
 
 const getSignUp = [
     preventAuthenticated,
     async (req, res) => {
-        res.render('sign-up');
+        res.render('account/sign-up');
     },
 ];
 
@@ -76,7 +76,7 @@ const signUpPost = [
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).render('sign-up', {
+            return res.status(400).render('account/sign-up', {
                 errors: errors.mapped(),
             });
         }
@@ -97,14 +97,14 @@ const loginPost = [
     async (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).render('login', {
+            return res.status(400).render('account/login', {
                 errors: errors.mapped(),
             });
         }
         passport.authenticate('local', (err, user) => {
             if (err) return next(err);
             if (!user) {
-                return res.status(401).render('login', {
+                return res.status(401).render('account/login', {
                     loginError: 'Invalid login credentials',
                 });
             }
