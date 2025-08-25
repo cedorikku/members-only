@@ -60,7 +60,6 @@ const validateUserSignUp = [
         .isLength({ min: 2, max: 255 })
         .withMessage(`Last name ${lengthErr(2, 255)}`),
     body('password')
-        .trim()
         .isLength({ min: 8, max: 255 })
         .withMessage(`Password ${lengthErr(8, 255)}`),
 ];
