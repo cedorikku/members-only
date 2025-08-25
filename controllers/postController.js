@@ -1,13 +1,7 @@
 import db from '../config/query.js';
 import { body, validationResult } from 'express-validator';
 
-const preventUnauthorized = (req, res, next) => {
-    if (!req.user) return res.redirect('/account/login');
-    next();
-};
-
 const createPostGet = [
-    preventUnauthorized,
     (req, res) => {
         res.render('post/create');
     },
@@ -37,7 +31,6 @@ const validatePost = [
 ];
 
 const createPostPost = [
-    preventUnauthorized,
     validatePost,
     async (req, res) => {
         const errors = validationResult(req);

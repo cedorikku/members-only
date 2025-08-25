@@ -2,24 +2,13 @@ import db from '../config/query.js';
 import { body, validationResult } from 'express-validator';
 import passport from '../config/passport.js';
 
-const preventAuthenticated = (req, res, next) => {
-    if (req.user) return res.redirect('/');
-    next();
+const getLogin = async (req, res) => {
+    res.render('account/login');
 };
 
-const getLogin = [
-    preventAuthenticated,
-    async (req, res) => {
-        res.render('account/login');
-    },
-];
-
-const getSignUp = [
-    preventAuthenticated,
-    async (req, res) => {
-        res.render('account/sign-up');
-    },
-];
+const getSignUp = async (req, res) => {
+    res.render('account/sign-up');
+};
 
 const alphaErr = 'must only contain letters.';
 const lengthErr = (min, max) => {
