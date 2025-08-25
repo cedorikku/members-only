@@ -7,6 +7,7 @@ import expressSession from 'express-session';
 import passport from './config/passport.js';
 import connectPgSimple from 'connect-pg-simple';
 import indexRouter from './routes/indexRouter.js';
+import accountRouter from './routes/accountRouter.js';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = process.env.PORT || 3000;
@@ -42,6 +43,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', indexRouter);
+app.use('/account', accountRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
