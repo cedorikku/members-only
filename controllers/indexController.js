@@ -6,18 +6,29 @@ import passport from '../config/passport.js';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const preventAuthenticated = (req, res, next) => {
+    if (req.user) return res.redirect('/');
+    next();
+};
+
 const getIndex = async (req, res) => {
     const posts = await db.getAllPosts('desc');
     res.render('index', { posts: posts });
 };
 
-const getLogin = async (req, res) => {
-    res.render('login');
-};
+const getLogin = [
+    preventAuthenticated,
+    async (req, res) => {
+        res.render('login');
+    },
+];
 
-const getSignUp = async (req, res) => {
-    res.render('sign-up');
-};
+const getSignUp = [
+    preventAuthenticated,
+    async (req, res) => {
+        res.render('sign-up');
+    },
+];
 
 const alphaErr = 'must only contain letters.';
 const usernameErr = 'can only contain alphanumeric characters and underscores';
