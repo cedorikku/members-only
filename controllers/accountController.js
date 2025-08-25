@@ -62,6 +62,13 @@ const validateUserSignUp = [
     body('password')
         .isLength({ min: 8, max: 255 })
         .withMessage(`Password ${lengthErr(8, 255)}`),
+    body('confirmPassword')
+        .notEmpty()
+        .withMessage(`Please confirm your password`)
+        .custom((confirmPassword, { req }) => {
+            return confirmPassword === req.body.password;
+        })
+        .withMessage('Password does not match'),
 ];
 
 const signUpPost = [
