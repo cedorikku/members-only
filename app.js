@@ -45,6 +45,10 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/account', accountRouter);
 
+app.use((req, res) => {
+    res.status(404).render('404');
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
