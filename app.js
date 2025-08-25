@@ -8,6 +8,7 @@ import passport from './config/passport.js';
 import connectPgSimple from 'connect-pg-simple';
 import indexRouter from './routes/indexRouter.js';
 import accountRouter from './routes/accountRouter.js';
+import postRouter from './routes/postRouter.js';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = process.env.PORT || 3000;
@@ -44,6 +45,7 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter);
 app.use('/account', accountRouter);
+app.use('/post', postRouter);
 
 app.use((req, res) => {
     res.status(404).render('404');

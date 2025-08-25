@@ -12,7 +12,14 @@
         <h1>Posts</h1>
 
         <div id="posts">
-            <% if (locals.posts) { %> <% posts.forEach(post => { %>
+            <% if(locals.currentUser) { %>
+            <a href="/post/create">Post</a>
+            <% } else { %>
+            <a href="/account/sign-up">Join the conversation</a>
+            <% } %>
+
+            <% if (locals.posts) { %>
+            <% posts.forEach(post => { %>
             <% const createdAt = post.created_at.toDateString(); %>
             <div class="post">
                 <div>

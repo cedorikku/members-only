@@ -40,4 +40,19 @@ const createUser = async (username, firstname, lastname, password) => {
     await pool.query(query, [username, firstname, lastname, hashedPassword]);
 };
 
-export default { getUserById, getUserByUsername, getAllPosts, createUser };
+const createPost = async (title, content, authorId) => {
+    const query = `
+        INSERT INTO posts (title, content, created_at, author_id)
+        VALUES ($1, $2, $3, $4)
+    `;
+    const now = new Date();
+    await pool.query(query, [title, content, now, authorId]);
+};
+
+export default {
+    getUserById,
+    getUserByUsername,
+    getAllPosts,
+    createUser,
+    createPost,
+};
