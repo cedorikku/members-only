@@ -23,7 +23,12 @@
 
             <div class="input-group <%= isInvalid ? 'invalid' : '' %>">
                 <label for="username">Username</label>
-                <input type="text" name="username" placeholder="Username" />
+                <input
+                    id="username"
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                />
                 <% if (!usernameValid) { %>
                 <small class="error"><%= errors.username.msg %></small>
                 <% } %>
@@ -31,7 +36,12 @@
 
             <div class="input-group <%= isInvalid ? 'invalid' : '' %>">
                 <label for="password">Password</label>
-                <input type="password" name="password" placeholder="Password" />
+                <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                />
                 <% if (!passwordValid) { %>
                 <small class="error"><%= errors.password.msg %></small>
                 <% } %>

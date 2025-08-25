@@ -29,7 +29,12 @@
 
             <div class="input-group <%= !usernameValid ? 'invalid' : '' %>">
                 <label for="username">Username</label>
-                <input type="text" name="username" placeholder="Username" />
+                <input
+                    id="username"
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                />
                 <% if (!usernameValid) { %>
                 <small class="error"><%= errors.username.msg %></small>
                 <% } %>
@@ -37,7 +42,12 @@
 
             <div class="input-group <%= !firstnameValid ? 'invalid' : '' %>">
                 <label for="firstname">First Name</label>
-                <input type="text" name="firstname" placeholder="First Name" />
+                <input
+                    id="firstname"
+                    type="text"
+                    name="firstname"
+                    placeholder="First Name"
+                />
                 <% if (!firstnameValid) { %>
                 <small class="error"><%= errors.firstname.msg %></small>
                 <% } %>
@@ -45,7 +55,12 @@
 
             <div class="input-group <%= !lastnameValid ? 'invalid' : '' %>">
                 <label for="lastname">Last Name</label>
-                <input type="text" name="lastname" placeholder="Last Name" />
+                <input
+                    id="lastname"
+                    type="text"
+                    name="lastname"
+                    placeholder="Last Name"
+                />
                 <% if (!lastnameValid) { %>
                 <small class="error"><%= errors.lastname.msg %></small>
                 <% } %>
@@ -53,7 +68,12 @@
 
             <div class="input-group <%= !passwordValid ? 'invalid' : '' %>">
                 <label for="password">Password</label>
-                <input type="password" name="password" placeholder="Password" />
+                <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                />
                 <% if (!passwordValid) { %>
                 <small class="error"><%= errors.password.msg %></small>
                 <% } %>
@@ -64,6 +84,7 @@
             >
                 <label for="confirmPassword">Confirm Password</label>
                 <input
+                    id="confirmPassword"
                     type="password"
                     name="confirmPassword"
                     placeholder="Confirm Password"
