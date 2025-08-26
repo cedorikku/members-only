@@ -1,9 +1,11 @@
 <nav>
-    <a href="/">Posts</a>
-    <% if (!locals.currentUser) { %>
-    <a href="/account/login">Login</a>
-    <a href="/account/sign-up">Sign Up</a>
-    <% } else { %>
-    <a href="/account/logout">Logout</a>
-    <% } %>
+    <ul>
+        <li><a href="/">Posts</a></li>
+        <% if (!locals.currentUser) { %>
+        <li><a href="/account/login">Login</a></li>
+        <li><a href="/account/sign-up">Sign Up</a></li>
+        <% } else { %>
+        <li><a href="/account/logout">Logout</a></li>
+        <% } %>
+    </ul>
 </nav>

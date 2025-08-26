@@ -31,13 +31,25 @@ const getAllPosts = async (order = 'desc') => {
     return rows;
 };
 
-const createUser = async (username, firstname, lastname, password, role = 'guest') => {
+const createUser = async (
+    username,
+    firstname,
+    lastname,
+    password,
+    role = 'guest',
+) => {
     const hashedPassword = await bcrypt.hash(password, 15);
     const query = `
         INSERT INTO users (username, firstname, lastname, password, role)
         VALUES ($1, $2, $3, $4, $5)
     `;
-    await pool.query(query, [username, firstname, lastname, hashedPassword, role]);
+    await pool.query(query, [
+        username,
+        firstname,
+        lastname,
+        hashedPassword,
+        role,
+    ]);
 };
 
 const createPost = async (title, content, authorId) => {
@@ -56,7 +68,7 @@ const updateRole = async (username, role) => {
         WHERE username = $1
     `;
     await pool.query(query, [username, role]);
-}
+};
 
 export default {
     getUserById,

@@ -1,8 +1,4 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
 import db from '../config/query.js';
-
-const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const getIndex = async (req, res) => {
     const posts = await db.getAllPosts('desc');
@@ -20,7 +16,9 @@ const enterSecretPost = async (req, res) => {
     if (SECRET === key) {
         await db.updateRole(req.user.username, 'member');
     } else {
-        return res.render('join', { errorMessage: 'Incorrect code. Try again.' });
+        return res.render('join', {
+            errorMessage: 'Incorrect code. Try again.',
+        });
     }
 
     res.redirect('/');
