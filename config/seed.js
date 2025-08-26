@@ -3,16 +3,21 @@ import 'dotenv/config';
 import bcrypt from 'bcryptjs';
 
 const seedUsers = async (client) => {
-    const USERS_TABLE = `CREATE TABLE IF NOT EXISTS users (
+    const USERS_TABLE = `
+        DROP TYPE IF EXISTS user_role CASCADE;
+        CREATE TYPE user_role AS ENUM ('guest', 'member', 'admin');
+        
+        CREATE TABLE IF NOT EXISTS users (
         id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
         username varchar(50) NOT NULL UNIQUE,
         firstname varchar(255) NOT NULL,
         lastname varchar(255) NOT NULL,
-        password varchar(255) NOT NULL
-    )`;
+        password varchar(255) NOT NULL,
+        role user_role NOT NULL DEFAULT 'guest');
+    `;
     await client.query(USERS_TABLE, []);
 
-    const INSERT_USERS = `INSERT INTO users (username, firstname, lastname, password) VALUES ($1, $2, $3, $4)`;
+    const INSERT_USERS = `INSERT INTO users (username, firstname, lastname, password, role) VALUES ($1, $2, $3, $4, $5)`;
     const saltLevel = 15;
     const hashedPassword = bcrypt.hashSync('secret123', saltLevel);
     await client.query(INSERT_USERS, [
@@ -20,6 +25,7 @@ const seedUsers = async (client) => {
         'John',
         'Doe',
         hashedPassword,
+        'guest',
     ]);
 
     console.log('A user has been created.');
