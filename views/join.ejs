@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Members Only</title>
+    </head>
+
+    <body>
+        <%- include('./partials/navbar.ejs') %>
+
+        <h2>Enter Secret Password</h2>
+        <form action="/join" method="POST">
+            <input type="password" name="key" />
+            <% if (locals.errorMessage) { %>
+            <small class="error"><%= errorMessage %></small>
+            <% } %>
+            <div>
+                <button type="submit">Enter</button>
+                <a href="/">Cancel</a>
+            </div>
+        </form>
+
+        <%- include('./partials/footer.ejs') %>
+    </body>
+</html>
