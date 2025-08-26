@@ -25,6 +25,7 @@
                     type="text"
                     name="title"
                     placeholder="Title"
+                    value="<%= previous ? previous.title : '' %>"
                 />
                 <% if (!titleValid) { %>
                 <small class="error"><%= errors.title.msg %></small>
@@ -36,7 +37,7 @@
                     id="content"
                     name="content"
                     placeholder="Body text (optional)"
-                ></textarea>
+                ><%= previous ? previous.content : '' %></textarea>
             </div>
             <button type="submit">Post</button>
             <a href="/">Cancel</a>

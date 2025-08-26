@@ -3,7 +3,7 @@ import passport from '../config/passport.js';
 import { validationResult } from 'express-validator';
 
 const getSignUp = async (req, res) => {
-    res.render('account/sign-up');
+    res.render('account/sign-up', { errors: null, previous: null });
 };
 
 const signUpPost = async (req, res) => {
@@ -11,6 +11,7 @@ const signUpPost = async (req, res) => {
     if (!errors.isEmpty()) {
         return res.status(400).render('account/sign-up', {
             errors: errors.mapped(),
+            previous: req.body,
         });
     }
 
@@ -20,7 +21,7 @@ const signUpPost = async (req, res) => {
 };
 
 const getLogin = async (req, res) => {
-    res.render('account/login');
+    res.render('account/login', { errors: null, previous: null });
 };
 
 const loginPost = async (req, res, next) => {
@@ -28,6 +29,7 @@ const loginPost = async (req, res, next) => {
     if (!errors.isEmpty()) {
         return res.status(400).render('account/login', {
             errors: errors.mapped(),
+            previous: { username: req.body.username },
         });
     }
     passport.authenticate('local', (err, user) => {
@@ -35,6 +37,7 @@ const loginPost = async (req, res, next) => {
         if (!user) {
             return res.status(401).render('account/login', {
                 loginError: 'Invalid login credentials',
+                previous: { username: req.body.username },
             });
         }
 
