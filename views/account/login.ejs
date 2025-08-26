@@ -12,14 +12,7 @@
         <h1>Login</h1>
 
         <form action="/account/login" method="POST">
-            <!-- prettier-ignore -->
-            <% const isInvalid = !!locals.loginError %>
-            <% let usernameValid = true %>
-            <% let passwordValid = true %>
-            <% if (locals.errors) { %>
-            <% usernameValid = !errors.username %>
-            <% passwordValid = !errors.password %>
-            <% } %>
+            <% const isInvalid = !!errors?.login %>
 
             <div class="input-group <%= isInvalid ? 'invalid' : '' %>">
                 <label for="username">Username</label>
@@ -28,9 +21,9 @@
                     type="text"
                     name="username"
                     placeholder="Username"
-                    value="<%= previous ? previous.username : ' ' %>"
+                    value="<%= previous ? previous.username : '' %>"
                 />
-                <% if (!usernameValid) { %>
+                <% if (errors?.username) { %>
                 <small class="error"><%= errors.username.msg %></small>
                 <% } %>
             </div>
@@ -43,13 +36,13 @@
                     name="password"
                     placeholder="Password"
                 />
-                <% if (!passwordValid) { %>
+                <% if (errors?.password) { %>
                 <small class="error"><%= errors.password.msg %></small>
                 <% } %>
             </div>
 
-            <% if (locals.loginError) { %>
-            <div><small class="error"><%= loginError %></small></div>
+            <% if (errors?.login) { %>
+            <div><small class="error"><%= errors.login.msg %></small></div>
             <% } %>
 
             <button type="submit">Login</button>

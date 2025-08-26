@@ -10,15 +10,10 @@
         <!-- prettier-ignore -->
         <%- include('../partials/navbar.ejs') %>
 
-        <% let titleValid = true; %>
-        <% if (locals.errors) { %>
-        <% titleValid = !errors.title; %>
-        <% } %>
-
         <h1>Create post</h1>
 
         <form action="/post/create" method="POST">
-            <div class="input-group <%= (!titleValid ? 'invalid' : '') %>">
+            <div class="input-group <%= (errors?.title ? 'invalid' : '') %>">
                 <label for="title"></label>
                 <input
                     id="title"
@@ -27,8 +22,8 @@
                     placeholder="Title"
                     value="<%= previous ? previous.title : '' %>"
                 />
-                <% if (!titleValid) { %>
-                <small class="error"><%= errors.title.msg %></small>
+                <% if (errors?.title) { %>
+                <small class="error"><%= errors?.title.msg %></small>
                 <% } %>
             </div>
             <div class="input-group">
@@ -37,7 +32,9 @@
                     id="content"
                     name="content"
                     placeholder="Body text (optional)"
-                ><%= previous ? previous.content : '' %></textarea>
+                >
+<%= previous ? previous.content : '' %></textarea
+                >
             </div>
             <button type="submit">Post</button>
             <a href="/">Cancel</a>

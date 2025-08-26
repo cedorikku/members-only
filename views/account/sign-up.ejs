@@ -12,22 +12,7 @@
         <h1>Sign Up</h1>
 
         <form action="/account/sign-up" method="POST">
-            <!-- prettier-ignore -->
-            <% let usernameValid = true %>
-            <% let firstnameValid = true %>
-            <% let lastnameValid = true %>
-            <% let passwordValid = true %>
-            <% let confirmPasswordValid = true %>
-
-            <% if (locals.errors) { %>
-            <% usernameValid = !errors.username %>
-            <% firstnameValid = !errors.firstname %>
-            <% lastnameValid = !errors.lastname %>
-            <% passwordValid = !errors.password %>
-            <% confirmPasswordValid = !errors.confirmPassword %>
-            <% } %>
-
-            <div class="input-group <%= !usernameValid ? 'invalid' : '' %>">
+            <div class="input-group <%= errors?.username ? 'invalid' : '' %>">
                 <label for="username">Username</label>
                 <input
                     id="username"
@@ -36,12 +21,12 @@
                     placeholder="Username"
                     value="<%= previous ? previous.username : '' %>"
                 />
-                <% if (!usernameValid) { %>
+                <% if (errors?.username) { %>
                 <small class="error"><%= errors.username.msg %></small>
                 <% } %>
             </div>
 
-            <div class="input-group <%= !firstnameValid ? 'invalid' : '' %>">
+            <div class="input-group <%= errors?.firstname ? 'invalid' : '' %>">
                 <label for="firstname">First Name</label>
                 <input
                     id="firstname"
@@ -50,12 +35,12 @@
                     placeholder="First Name"
                     value="<%= previous ? previous.firstname : '' %>"
                 />
-                <% if (!firstnameValid) { %>
+                <% if (errors?.firstname) { %>
                 <small class="error"><%= errors.firstname.msg %></small>
                 <% } %>
             </div>
 
-            <div class="input-group <%= !lastnameValid ? 'invalid' : '' %>">
+            <div class="input-group <%= errors?.lastname ? 'invalid' : '' %>">
                 <label for="lastname">Last Name</label>
                 <input
                     id="lastname"
@@ -64,12 +49,12 @@
                     placeholder="Last Name"
                     value="<%= previous ? previous.lastname : '' %>"
                 />
-                <% if (!lastnameValid) { %>
+                <% if (errors?.lastname) { %>
                 <small class="error"><%= errors.lastname.msg %></small>
                 <% } %>
             </div>
 
-            <div class="input-group <%= !passwordValid ? 'invalid' : '' %>">
+            <div class="input-group <%= errors?.password ? 'invalid' : '' %>">
                 <label for="password">Password</label>
                 <input
                     id="password"
@@ -78,13 +63,13 @@
                     placeholder="Password"
                     value="<%= previous ? previous.password : '' %>"
                 />
-                <% if (!passwordValid) { %>
+                <% if (errors?.password) { %>
                 <small class="error"><%= errors.password.msg %></small>
                 <% } %>
             </div>
 
             <div
-                class="input-group <%= !confirmPasswordValid ? 'invalid' : '' %>"
+                class="input-group <%= errors?.confirmPassword ? 'invalid' : '' %>"
             >
                 <label for="confirmPassword">Confirm Password</label>
                 <input
@@ -93,7 +78,7 @@
                     name="confirmPassword"
                     placeholder="Confirm Password"
                 />
-                <% if (!confirmPasswordValid) { %>
+                <% if (errors?.confirmPassword) { %>
                 <small class="error"><%= errors.confirmPassword.msg %></small>
                 <% } %>
             </div>

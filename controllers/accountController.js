@@ -36,7 +36,11 @@ const loginPost = async (req, res, next) => {
         if (err) return next(err);
         if (!user) {
             return res.status(401).render('account/login', {
-                loginError: 'Invalid login credentials',
+                errors: {
+                    login: {
+                        msg: 'Invalid login credentials',
+                    },
+                },
                 previous: { username: req.body.username },
             });
         }

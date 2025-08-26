@@ -11,13 +11,7 @@
         <%- include('./partials/navbar.ejs') %>
 
         <% const anonPlaceholder = '*'.repeat(8); %>
-
-        <% let isMember = false; %>
-        <% let isAdmin = false; %>
-        <% if (locals.currentUser) { %>
-        <% isMember = (currentUser.role !== 'guest'); %>
-        <% isAdmin = (currentUser.role === 'admin'); %>
-        <% } %>
+        <% const isMember = ((currentUser?.role ?? 'guest') !== 'guest'); %>
 
         <h1>Posts</h1>
         <% if (!isMember) { %>
