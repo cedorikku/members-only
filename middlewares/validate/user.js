@@ -4,9 +4,9 @@ import db from '../../config/query.js';
 const alphaErr = 'must only contain letters.';
 const lengthErr = (min, max) => {
     if (min && max) {
-        return `must be between ${min} and ${max} characters.`;
+        return `must be between ${min} and ${max} characters`;
     } else if (min) {
-        return `must be at least ${min} characters.`;
+        return `must be at least ${min} characters`;
     } else {
         throw new Error('Length of min or with max not provided.');
     }
@@ -24,7 +24,7 @@ export const createUserValidator = [
         .custom(async (username) => {
             const existingUser = await db.getUserByUsername(username);
             if (existingUser) {
-                throw new Error('Username already in use.');
+                throw new Error('Username already in use');
             }
         }),
     body('firstname')
@@ -52,6 +52,6 @@ export const createUserValidator = [
 ];
 
 export const loginUserValidator = [
-    body('username').trim().notEmpty().withMessage('Username is required.'),
-    body('password').trim().notEmpty().withMessage('Password is required.'),
+    body('username').trim().notEmpty().withMessage('Username is required'),
+    body('password').trim().notEmpty().withMessage('Password is required'),
 ];
