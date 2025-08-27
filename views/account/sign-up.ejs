@@ -4,92 +4,105 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Members Only</title>
+        <link rel="stylesheet" href="/styles/styles.css" />
     </head>
 
     <body>
         <%- include('../partials/navbar.ejs') %>
+        <main class="wrapper">
+            <h1>Sign Up for free</h1>
 
-        <h1>Sign Up</h1>
+            <form action="/account/sign-up" method="POST">
+                <div
+                    class="input-group <%= errors?.username ? 'invalid' : '' %>"
+                >
+                    <label for="username">Username</label>
+                    <input
+                        id="username"
+                        type="text"
+                        name="username"
+                        placeholder="Username"
+                        value="<%= previous ? previous.username : '' %>"
+                    />
+                    <% if (errors?.username) { %>
+                    <small class="error"> <%= errors.username.msg %> </small>
+                    <% } %>
+                </div>
 
-        <form action="/account/sign-up" method="POST">
-            <div class="input-group <%= errors?.username ? 'invalid' : '' %>">
-                <label for="username">Username</label>
-                <input
-                    id="username"
-                    type="text"
-                    name="username"
-                    placeholder="Username"
-                    value="<%= previous ? previous.username : '' %>"
-                />
-                <% if (errors?.username) { %>
-                <small class="error"><%= errors.username.msg %></small>
-                <% } %>
-            </div>
+                <div
+                    class="input-group <%= errors?.firstname ? 'invalid' : '' %>"
+                >
+                    <label for="firstname">First Name</label>
+                    <input
+                        id="firstname"
+                        type="text"
+                        name="firstname"
+                        placeholder="First Name"
+                        value="<%= previous ? previous.firstname : '' %>"
+                    />
+                    <% if (errors?.firstname) { %>
+                    <small class="error"> <%= errors.firstname.msg %> </small>
+                    <% } %>
+                </div>
 
-            <div class="input-group <%= errors?.firstname ? 'invalid' : '' %>">
-                <label for="firstname">First Name</label>
-                <input
-                    id="firstname"
-                    type="text"
-                    name="firstname"
-                    placeholder="First Name"
-                    value="<%= previous ? previous.firstname : '' %>"
-                />
-                <% if (errors?.firstname) { %>
-                <small class="error"><%= errors.firstname.msg %></small>
-                <% } %>
-            </div>
+                <div
+                    class="input-group <%= errors?.lastname ? 'invalid' : '' %>"
+                >
+                    <label for="lastname">Last Name</label>
+                    <input
+                        id="lastname"
+                        type="text"
+                        name="lastname"
+                        placeholder="Last Name"
+                        value="<%= previous ? previous.lastname : '' %>"
+                    />
+                    <% if (errors?.lastname) { %>
+                    <small class="error"> <%= errors.lastname.msg %> </small>
+                    <% } %>
+                </div>
 
-            <div class="input-group <%= errors?.lastname ? 'invalid' : '' %>">
-                <label for="lastname">Last Name</label>
-                <input
-                    id="lastname"
-                    type="text"
-                    name="lastname"
-                    placeholder="Last Name"
-                    value="<%= previous ? previous.lastname : '' %>"
-                />
-                <% if (errors?.lastname) { %>
-                <small class="error"><%= errors.lastname.msg %></small>
-                <% } %>
-            </div>
+                <div
+                    class="input-group <%= errors?.password ? 'invalid' : '' %>"
+                >
+                    <label for="password">Password</label>
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        value="<%= previous ? previous.password : '' %>"
+                    />
+                    <% if (errors?.password) { %>
+                    <small class="error"> <%= errors.password.msg %> </small>
+                    <% } %>
+                </div>
 
-            <div class="input-group <%= errors?.password ? 'invalid' : '' %>">
-                <label for="password">Password</label>
-                <input
-                    id="password"
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value="<%= previous ? previous.password : '' %>"
-                />
-                <% if (errors?.password) { %>
-                <small class="error"><%= errors.password.msg %></small>
-                <% } %>
-            </div>
+                <div
+                    class="input-group <%= errors?.confirmPassword ? 'invalid' : '' %>"
+                >
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input
+                        id="confirmPassword"
+                        type="password"
+                        name="confirmPassword"
+                        placeholder="Confirm Password"
+                    />
+                    <% if (errors?.confirmPassword) { %>
+                    <small class="error">
+                        <%= errors.confirmPassword.msg %>
+                    </small>
+                    <% } %>
+                </div>
 
-            <div
-                class="input-group <%= errors?.confirmPassword ? 'invalid' : '' %>"
-            >
-                <label for="confirmPassword">Confirm Password</label>
-                <input
-                    id="confirmPassword"
-                    type="password"
-                    name="confirmPassword"
-                    placeholder="Confirm Password"
-                />
-                <% if (errors?.confirmPassword) { %>
-                <small class="error"><%= errors.confirmPassword.msg %></small>
-                <% } %>
-            </div>
+                <button type="submit">Sign Up</button>
 
-            <button type="submit">Sign Up</button>
+                <hr />
 
-            <div>
-                Already have an account? <a href="/account/login">Login</a>
-            </div>
-        </form>
-
+                <div>
+                    Already have an account? <a href="/account/login">Login</a>
+                </div>
+            </form>
+        </main>
         <%- include('../partials/footer.ejs') %>
     </body>
 </html>

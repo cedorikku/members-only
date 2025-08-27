@@ -1,11 +1,15 @@
-<nav>
-    <ul>
-        <li><a href="/">Posts</a></li>
-        <% if (!locals.currentUser) { %>
-        <li><a href="/account/login">Login</a></li>
-        <li><a href="/account/sign-up">Sign Up</a></li>
-        <% } else { %>
-        <li><a href="/account/logout">Logout</a></li>
-        <% } %>
-    </ul>
+<nav id="navbar">
+    <div class="nav-content wrapper">
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+        </ul>
+        <ul class="account-links">
+            <% if (!locals.currentUser) { %>
+            <li><a href="/account/login">Login</a></li>
+            <li><a href="/account/sign-up">Sign Up</a></li>
+            <% } else { %>
+            <li><a href="/account/logout">Logout</a></li>
+            <% } %>
+        </ul>
+    </div>
 </nav>

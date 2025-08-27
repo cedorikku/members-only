@@ -4,53 +4,59 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Members Only</title>
+        <link rel="stylesheet" href="/styles/styles.css" />
     </head>
 
     <body>
         <%- include('../partials/navbar.ejs') %>
+        <main class="wrapper">
+            <h1>Login</h1>
+            <form action="/account/login" method="POST">
+                <div
+                    class="input-group <%= (errors?.username || errors?.login) ? 'invalid' : '' %>"
+                >
+                    <label for="username">Username</label>
+                    <input
+                        id="username"
+                        type="text"
+                        name="username"
+                        placeholder="Username"
+                        value="<%= previous ? previous.username : '' %>"
+                    />
+                    <% if (errors?.username) { %>
+                    <small class="error"><%= errors.username.msg %></small>
+                    <% } %>
+                </div>
 
-        <h1>Login</h1>
+                <div
+                    class="input-group <%= (errors?.password || errors?.login) ? 'invalid' : '' %>"
+                >
+                    <label for="password">Password</label>
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                    />
+                    <% if (errors?.password) { %>
+                    <small class="error"><%= errors.password.msg %></small>
+                    <% } %>
+                </div>
 
-        <form action="/account/login" method="POST">
-            <% const isInvalid = !!errors?.login %>
-
-            <div class="input-group <%= isInvalid ? 'invalid' : '' %>">
-                <label for="username">Username</label>
-                <input
-                    id="username"
-                    type="text"
-                    name="username"
-                    placeholder="Username"
-                    value="<%= previous ? previous.username : '' %>"
-                />
-                <% if (errors?.username) { %>
-                <small class="error"><%= errors.username.msg %></small>
+                <% if (errors?.login) { %>
+                <div><small class="error"><%= errors.login.msg %></small></div>
                 <% } %>
-            </div>
 
-            <div class="input-group <%= isInvalid ? 'invalid' : '' %>">
-                <label for="password">Password</label>
-                <input
-                    id="password"
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                />
-                <% if (errors?.password) { %>
-                <small class="error"><%= errors.password.msg %></small>
-                <% } %>
-            </div>
+                <button type="submit">Login</button>
 
-            <% if (errors?.login) { %>
-            <div><small class="error"><%= errors.login.msg %></small></div>
-            <% } %>
+                <hr />
 
-            <button type="submit">Login</button>
-
-            <div>
-                Don't have an account? <a href="/account/sign-up">Sign Up</a>
-            </div>
-        </form>
+                <div>
+                    Don't have an account?
+                    <a href="/account/sign-up">Sign Up</a>
+                </div>
+            </form>
+        </main>
 
         <%- include('../partials/footer.ejs') %>
     </body>

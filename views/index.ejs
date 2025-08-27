@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Members Only</title>
+        <link rel="stylesheet" href="/styles/styles.css" />
     </head>
 
     <body>
@@ -13,20 +14,21 @@
         <% const anonPlaceholder = '*'.repeat(8); %>
         <% const isMember = ((currentUser?.role ?? 'guest') !== 'guest'); %>
 
-        <h1>Posts</h1>
-        <% if (!isMember && locals.currentUser) { %>
-        <p class="banner">
-            You are currently browsing as a guest. To see other users you have
-            to <a href="/join">join the club</a> first.
-        </p>
-        <% } %>
-        <div id="posts">
+        <main id="posts" class="wrapper">
+            <h1>Feed</h1>
+            <% if (!isMember && locals.currentUser) { %>
+            <p class="banner">
+                You are currently browsing as a guest. To see other users you
+                have to <a href="/join">join the club</a> first.
+            </p>
+            <% } %>
+
             <% if (locals.currentUser) { %>
-            <div>
+            <div class="btn-link">
                 <a href="/post/create">Post</a>
             </div>
             <% } else { %>
-            <div>
+            <div class="btn-link">
                 <a href="/account/sign-up">Join the conversation</a>
             </div>
             <% } %>
@@ -37,23 +39,19 @@
             <% const fullName = (isMember) ? `${post.firstname} ${post.lastname}` : anonPlaceholder %>
             <% const createdAt = post.created_at.toDateString(); %>
             <div class="post">
-                <div>
-                    <h3>
-                        <%= post.title %>
-                    </h3>
-                </div>
-                <p><%= post.content %></p>
+                <h3 class="post-title"><%= post.title %></h3>
                 <small>
                     <%= `${fullName} @${username}` %>
                     | Posted on
                     <%= createdAt %>
                 </small>
+                <p><%= post.content %></p>
             </div>
             <% }) %>
             <% } else { %>
             <p>No posts available.</p>
             <% } %>
-        </div>
+        </main>
 
         <%- include('./partials/footer.ejs') %>
     </body>

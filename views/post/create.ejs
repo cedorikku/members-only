@@ -4,41 +4,47 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Members Only</title>
+        <link rel="stylesheet" href="/styles/styles.css" />
     </head>
 
     <body>
         <!-- prettier-ignore -->
         <%- include('../partials/navbar.ejs') %>
 
-        <h1>Create post</h1>
+        <main class="wrapper">
+            <h1>Create post</h1>
 
-        <form action="/post/create" method="POST">
-            <div class="input-group <%= (errors?.title ? 'invalid' : '') %>">
-                <label for="title"></label>
-                <input
-                    id="title"
-                    type="text"
-                    name="title"
-                    placeholder="Title"
-                    value="<%= previous ? previous.title : '' %>"
-                />
-                <% if (errors?.title) { %>
-                <small class="error"><%= errors?.title.msg %></small>
-                <% } %>
-            </div>
-            <div class="input-group">
-                <label for="content"></label>
-                <textarea
-                    id="content"
-                    name="content"
-                    placeholder="Body text (optional)"
+            <form action="/post/create" method="POST">
+                <div
+                    class="input-group <%= (errors?.title ? 'invalid' : '') %>"
                 >
+                    <label for="title"></label>
+                    <input
+                        id="title"
+                        type="text"
+                        name="title"
+                        placeholder="Title"
+                        value="<%= previous ? previous.title : '' %>"
+                    />
+                    <% if (errors?.title) { %>
+                    <small class="error"><%= errors?.title.msg %></small>
+                    <% } %>
+                </div>
+                <div class="input-group">
+                    <label for="content"></label>
+                    <textarea
+                        id="content"
+                        name="content"
+                        placeholder="Body text (optional)"
+                        rows="10"
+                    >
 <%= previous ? previous.content : '' %></textarea
-                >
-            </div>
-            <button type="submit">Post</button>
-            <a href="/">Cancel</a>
-        </form>
+                    >
+                </div>
+                <button type="submit">Post</button>
+                <a href="/">Cancel</a>
+            </form>
+        </main>
 
         <%- include('../partials/footer.ejs') %>
     </body>

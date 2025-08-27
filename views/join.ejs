@@ -4,23 +4,33 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Members Only</title>
+        <link rel="stylesheet" href="/styles/styles.css" />
     </head>
 
     <body>
         <%- include('./partials/navbar.ejs') %>
 
-        <h2>Enter Secret Password</h2>
-        <form action="/join" method="POST">
-            <input type="password" name="key" />
-            <% if (locals.errorMessage) { %>
-            <small class="error"><%= errorMessage %></small>
-            <% } %>
-            <div>
+        <main class="wrapper">
+            <h2>Enter Secret Password</h2>
+            <form action="/join" method="POST">
+                <div class="input-group">
+                    <input type="password" name="key" />
+                </div>
+                <% if (locals.errorMessage) { %>
+                <small class="error"><%= errorMessage %></small>
+                <% } %>
                 <button type="submit">Enter</button>
                 <a href="/">Cancel</a>
-            </div>
-        </form>
+            </form>
+        </main>
 
         <%- include('./partials/footer.ejs') %>
+
+        <script defer>
+            document.addEventListener('DOMContentLoaded', () => {
+                const inputField = document.querySelector('input[name="key"]');
+                inputField.focus();
+            });
+        </script>
     </body>
 </html>

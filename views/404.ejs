@@ -2,22 +2,25 @@
 <html lang="en">
     <head>
         <title>Page Not Found</title>
+        <link rel="stylesheet" href="/styles/styles.css" />
     </head>
 
     <body>
         <%- include('./partials/navbar.ejs') %>
-        <h1>Error 404</h1>
-        <p>
-            Oops, this page doesn't exist.
-            <a
-                href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/404"
-                target="_blank"
-                >Learn More</a
-            >
-        </p>
-        <p>
-            <a href="/">Go back</a>
-        </p>
+        <main class="wrapper">
+            <h1>Error 404</h1>
+            <p>
+                Sorry, this page doesn't exist.
+                <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/404"
+                    target="_blank"
+                    >Learn More</a
+                >
+            </p>
+            <p>
+                <a href="/">Go back</a>
+            </p>
+        </main>
         <%- include('./partials/footer.ejs') %>
     </body>
 </html>
