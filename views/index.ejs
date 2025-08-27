@@ -24,13 +24,9 @@
             <% } %>
 
             <% if (locals.currentUser) { %>
-            <div class="btn-link">
-                <a href="/post/create">Post</a>
-            </div>
+            <a class="btn-link" href="/post/create">⊕ Post</a>
             <% } else { %>
-            <div class="btn-link">
-                <a href="/account/sign-up">Join the conversation</a>
-            </div>
+            <a class="btn-link" href="/account/sign-up">⊚ Join the conversation</a>
             <% } %>
 
             <% if (locals.posts) { %>

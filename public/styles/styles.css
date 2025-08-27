@@ -73,6 +73,11 @@ button:active {
     transform: scale(0.97);
 }
 
+main a.btn-link {
+    color: black;
+    background-color: white;
+}
+
 #navbar {
     position: sticky;
     top: 0;
