@@ -29,13 +29,13 @@ export const createUserValidator = [
         }),
     body('firstname')
         .trim()
-        .isAlpha()
+        .matches(/^[a-zA-Z ]+$/)
         .withMessage(`First name ${alphaErr}`)
         .isLength({ min: 2, max: 255 })
         .withMessage(`First name ${lengthErr(2, 255)}`),
     body('lastname')
         .trim()
-        .isAlpha()
+        .matches(/^[a-zA-Z ]+$/)
         .withMessage(`Last name ${alphaErr}`)
         .isLength({ min: 2, max: 255 })
         .withMessage(`Last name ${lengthErr(2, 255)}`),
