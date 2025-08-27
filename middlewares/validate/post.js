@@ -13,9 +13,15 @@ const contentLimit = Object.freeze({
 export const validatePost = [
     body('title')
         .isLength({ min: titleLimit.MIN, max: titleLimit.MAX })
-        .withMessage(
-            `The title is required to be at least ${titleLimit.MIN} characters (${titleLimit.MAX} max)`,
-        ),
+        .withMessage((value) => {
+            if (value.length < titleLimit.MIN) {
+                return `Your title is too short. It must be at least ${titleLimit.MIN} characters ${value.length} (${value.length}/${titleLimit.MIN}).`;
+            }
+            if (value.length > titleLimit.MAX) {
+                return `Your title is too long. The maximum allowed is ${titleLimit.MAX} characters (${value.length}/${titleLimit.MAX}).`;
+            }
+            return `Your title must be between ${titleLimit.MIN} and ${titleLimit.MAX} characters (${value.length}/${titleLimit.MAX}).`;
+        }),
     body('content')
         .isLength({ min: contentLimit.MIN, max: contentLimit.MAX })
         .withMessage(
