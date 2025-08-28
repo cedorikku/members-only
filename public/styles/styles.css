@@ -76,6 +76,10 @@ main .btn-link {
     background-color: white;
 }
 
+.btn-delete {
+    background-color: var(--error);
+}
+
 #navbar {
     position: sticky;
     top: 0;
@@ -91,7 +95,7 @@ main .btn-link {
     }
 
     & .logo {
-        font-family: "Rubik Mono One", monospace;
+        font-family: 'Rubik Mono One', monospace;
         font-weight: 800;
         user-select: none;
     }
@@ -247,6 +251,23 @@ form {
     text-align: center;
     font-weight: bold;
     margin: 1rem 0;
+}
+
+dialog {
+    color: white;
+    background-color: var(--background);
+    padding: 1rem 2rem 2rem 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    
+    & p {
+        font-weight: bold;
+    }
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
 }
 
 @media (max-width: 650px) {

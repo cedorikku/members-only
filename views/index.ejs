@@ -47,6 +47,12 @@
                 </div>
                 <h3 class="post-title"><%= post.title %></h3>
                 <p class="post-content"><%= post.content %></p>
+
+                <% if (currentUser?.role === 'admin') { %>
+                <button class="btn-delete" type="button" data-post-id="<%= post.id %>">
+                    ⊖ Delete
+                </button>
+                <% } %>
             </div>
             <% }) %>
             <% } else { %>
@@ -55,5 +61,6 @@
         </main>
 
         <%- include('./partials/footer.ejs') %>
+        <%- include('partials/modals/delete') %>
     </body>
 </html>
