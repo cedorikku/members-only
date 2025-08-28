@@ -61,6 +61,14 @@ const createPost = async (title, content, authorId) => {
     await pool.query(query, [title, content, now, authorId]);
 };
 
+const deletePost = async (id) => {
+    const query = `
+        DELETE FROM posts
+        WHERE id = $1
+    `
+    await pool.query(query, [id]);
+}
+
 const updateRole = async (username, role) => {
     const query = `
         UPDATE users
@@ -76,5 +84,6 @@ export default {
     getAllPosts,
     createUser,
     createPost,
+    deletePost,
     updateRole,
 };

@@ -22,6 +22,10 @@ const createPostPost = async (req, res) => {
     res.status(201).redirect('/');
 };
 
-// TODO : Delete a post when user is 'admin'
+const deletePost = async (req, res) => {
+    const id = req.params.id;
+    await db.deletePost(id);
+    res.status(204).redirect('/');
+};
 
-export default { createPostGet, createPostPost };
+export default { createPostGet, createPostPost, deletePost };
