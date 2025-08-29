@@ -19,6 +19,8 @@ body {
 
 main {
     min-height: 75vh;
+    min-width: 600px;
+    padding-top: 100px;
 
     h1 {
         font-family: 'Rubik Mono One', monospace;
@@ -81,9 +83,12 @@ main .btn-link {
 }
 
 #navbar {
-    position: sticky;
-    top: 0;
+    position: fixed;
+    top: 0; 
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    padding: 1rem 0;
     background-color: var(--secondary);
     backdrop-filter: blur(16px);
 
@@ -106,8 +111,9 @@ main .btn-link {
 
     & ul {
         display: flex;
-        gap: 1rem;
+        gap: 0.5rem;
         padding-left: 0;
+        margin: 0;
 
         & li {
             list-style: none;
@@ -259,7 +265,7 @@ dialog {
     padding: 1rem 2rem 2rem 2rem;
     border: none;
     border-radius: 0.5rem;
-    
+
     & p {
         font-weight: bold;
     }
@@ -271,10 +277,16 @@ dialog::backdrop {
 }
 
 @media (max-width: 650px) {
-    #navbar .nav-content {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.25rem;
+    #navbar {
+        & .nav-content {
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 1rem 0;
+        }
+    }
+    main {
+        padding-top: 150px;
     }
 }
 
