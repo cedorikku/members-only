@@ -19,14 +19,18 @@ const getUserByUsername = async (username) => {
     return rows[0];
 };
 
-const getAllPosts = async (order = 'desc') => {
-    // TODO: Add pagination
-    const query = `
-        SELECT p.id, p.title, p.content, p.created_at, u.username, u.firstname, u.lastname 
-        FROM posts p JOIN users u ON p.author_id = u.id
-        ORDER BY p.created_at ${order}
+const getPosts = async (order = 'desc') => {
+    const select = `
+        SELECT p.id, p.title, p.content, p.created_at,
+            u.username, u.firstname, u.lastname
+        FROM posts p 
+        JOIN users u ON p.author_id = u.id
+        WHERE p.deleted_by IS NULL
     `;
-    const { rows } = await pool.query(query, []);
+
+    const ordered = `${select} ORDER BY p.created_at ${order}`;
+
+    const { rows } = await pool.query(ordered, []);
 
     return rows;
 };
@@ -82,7 +86,7 @@ const updateRole = async (username, role) => {
 export default {
     getUserById,
     getUserByUsername,
-    getAllPosts,
+    getPosts,
     createUser,
     createPost,
     deletePost,

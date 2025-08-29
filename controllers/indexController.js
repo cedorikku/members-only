@@ -1,7 +1,7 @@
 import db from '../config/query.js';
 
 const getIndex = async (req, res) => {
-    const posts = await db.getAllPosts('desc');
+    const posts = await db.getPosts();
     res.render('index', { posts: posts });
 };
 
