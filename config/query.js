@@ -61,13 +61,14 @@ const createPost = async (title, content, authorId) => {
     await pool.query(query, [title, content, now, authorId]);
 };
 
-const deletePost = async (id) => {
+const deletePost = async (id, deletedByUserId) => {
     const query = `
-        DELETE FROM posts
+        UPDATE posts
+        SET deleted_by = $2
         WHERE id = $1
-    `
-    await pool.query(query, [id]);
-}
+    `;
+    await pool.query(query, [id, deletedByUserId]);
+};
 
 const updateRole = async (username, role) => {
     const query = `

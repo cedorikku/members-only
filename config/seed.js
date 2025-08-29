@@ -37,7 +37,8 @@ const seedPosts = async (client) => {
         title varchar(50) NOT NULL,
         content text NOT NULL CHECK (char_length(content) <= 400),
         created_at timestamp NOT NULL,
-        author_id integer REFERENCES users (id)
+        author_id integer REFERENCES users (id) NOT NULL,
+        deleted_by integer REFERENCES users (id) NULL
     )`;
     /*  NOTE: author_id could also be a foreign key with this syntax
      * FOREIGN KEY (author_id) REFERENCES users (id)

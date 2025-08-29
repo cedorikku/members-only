@@ -24,7 +24,9 @@ const createPostPost = async (req, res) => {
 
 const deletePost = async (req, res) => {
     const id = req.params.id;
-    await db.deletePost(id);
+    const deletedByUserId = req.user.id;
+
+    await db.deletePost(id, deletedByUserId);
     res.status(204).redirect('/');
 };
 
