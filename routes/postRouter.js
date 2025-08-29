@@ -10,5 +10,6 @@ router.use(preventUnauthorized);
 router.get('/create', postController.createPostGet);
 router.post('/create', validatePost, postController.createPostPost);
 router.post('/delete/:id', adminOnly, postController.deletePost);
+router.get('/deleted', postController.getDeletedPosts);
 
 export default router;

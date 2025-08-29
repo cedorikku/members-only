@@ -9,24 +9,18 @@
 
     <body>
         <!-- prettier-ignore -->
-        <%- include('./partials/navbar.ejs') %>
+        <%- include('../partials/navbar.ejs') %>
 
         <% const anonPlaceholder = '∗'.repeat(8); %>
         <% const isMember = ((currentUser?.role ?? 'guest') !== 'guest'); %>
 
         <main id="posts" class="wrapper">
-            <h1>Feed</h1>
+            <h1>Deleted</h1>
             <% if (!isMember && locals.currentUser) { %>
             <p class="banner">
-                You are currently browsing as a guest. To see other users, 
-                you have to <a href="/join">join the club</a> first.
+                You are currently viewing deleted posts.
+                <a href="/">Click here</a> to go back.
             </p>
-            <% } %>
-
-            <% if (locals.currentUser) { %>
-            <a class="btn-link" href="/post/create">⊕ Post</a>
-            <% } else { %>
-            <a class="btn-link" href="/account/sign-up">⊚ Join the conversation</a>
             <% } %>
 
             <% if (locals.posts) { %>
@@ -35,6 +29,12 @@
             <% const fullName = (isMember) ? `${post.firstname} ${post.lastname}` : anonPlaceholder %>
             <% const createdAt = post.created_at.toDateString(); %>
             <div class="post">
+                <% if (post.deleter) { %>
+                <div class="banner" style="background-color: #dd3535; border: none;">
+                    This post was deleted by an admin: 
+                    <strong>@<%= (isMember) ? post.deleter : anonPlaceholder %></strong>
+                </div> 
+                <% } %>
                 <div class="post-meta">
                     <div class="left">
                         <div class="avatar"></div>
@@ -48,7 +48,7 @@
                 <h3 class="post-title"><%= post.title %></h3>
                 <p class="post-content"><%= post.content %></p>
 
-                <% if (currentUser?.role === 'admin') { %>
+                <% if (currentUser?.role === 'admin' && !post.deleter) { %>
                 <button class="btn-delete" type="button" data-post-id="<%= post.id %>">
                     ⊖ Delete
                 </button>
@@ -56,14 +56,13 @@
             </div>
             <% }) %>
             <p>
-                Looking for deleted posts? <a href="/post/deleted">Click here</a>.
+                <a href="/">Go back home</a>
             </p>
             <% } else { %>
             <p>No posts available.</p>
             <% } %>
         </main>
 
-        <%- include('./partials/footer.ejs') %>
-        <%- include('partials/modals/delete') %>
+        <%- include('../partials/footer.ejs') %>
     </body>
 </html>

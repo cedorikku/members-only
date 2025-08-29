@@ -30,4 +30,9 @@ const deletePost = async (req, res) => {
     res.status(204).redirect('/');
 };
 
-export default { createPostGet, createPostPost, deletePost };
+const getDeletedPosts = async (req, res) => {
+    const posts = await db.getDeletedPosts();
+    res.render('post/deleted', { posts: posts });
+};
+
+export default { createPostGet, createPostPost, deletePost, getDeletedPosts };

@@ -35,6 +35,24 @@ const getPosts = async (order = 'desc') => {
     return rows;
 };
 
+const getDeletedPosts = async (order = 'desc') => {
+    const select = `
+        SELECT p.id, p.title, p.content, p.created_at,
+            u1.username, u1.firstname, u1.lastname, 
+            u2.username AS deleter
+        FROM posts p 
+        JOIN users u1 ON p.author_id = u1.id
+        LEFT JOIN users u2 ON p.deleted_by = u2.id
+        WHERE p.deleted_by IS NOT NULL
+    `;
+
+    const ordered = `${select} ORDER BY p.created_at ${order}`;
+
+    const { rows } = await pool.query(ordered, []);
+
+    return rows;
+};
+
 const createUser = async (
     username,
     firstname,
@@ -87,6 +105,7 @@ export default {
     getUserById,
     getUserByUsername,
     getPosts,
+    getDeletedPosts,
     createUser,
     createPost,
     deletePost,
