@@ -10,7 +10,7 @@ const enterSecretGet = async (req, res) => {
 };
 
 const enterSecretPost = async (req, res) => {
-    const SECRET = process.env.SECRET || 'unset';
+    const SECRET = process.env.SECRET_CODE || 'unset';
     const key = req.body.key;
 
     if (SECRET === key) {
