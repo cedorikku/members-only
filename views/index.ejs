@@ -18,15 +18,17 @@
             <h1>Feed</h1>
             <% if (!isMember && locals.currentUser) { %>
             <p class="banner">
-                You are currently browsing as a guest. To see other users, 
-                you have to <a href="/join">join the club</a> first.
+                You are currently browsing as a guest. To see other users, you
+                have to <a href="/join">join the club</a> first.
             </p>
             <% } %>
 
             <% if (locals.currentUser) { %>
             <a class="btn-link" href="/post/create">⊕ Post</a>
             <% } else { %>
-            <a class="btn-link" href="/account/sign-up">⊚ Join the conversation</a>
+            <a class="btn-link" href="/account/sign-up"
+                >⊚ Join the conversation</a
+            >
             <% } %>
 
             <% if (locals.posts) { %>
@@ -49,14 +51,19 @@
                 <p class="post-content"><%= post.content %></p>
 
                 <% if (currentUser?.role === 'admin') { %>
-                <button class="btn-delete" type="button" data-post-id="<%= post.id %>">
+                <button
+                    class="btn-delete"
+                    type="button"
+                    data-post-id="<%= post.id %>"
+                >
                     ⊖ Delete
                 </button>
                 <% } %>
             </div>
             <% }) %>
             <p>
-                Looking for deleted posts? <a href="/post/deleted">Click here</a>.
+                Looking for deleted posts?
+                <a href="/post/deleted">Click here</a>.
             </p>
             <% } else { %>
             <p>No posts available.</p>

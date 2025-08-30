@@ -84,7 +84,7 @@ main .btn-link {
 
 #navbar {
     position: fixed;
-    top: 0; 
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
@@ -167,9 +167,11 @@ footer {
 
             & .avatar {
                 background: #2a7b9b;
-                background: linear-gradient(50deg,
-                        rgba(42, 123, 155, 1) 0%,
-                        rgba(107, 161, 255, 1) 100%);
+                background: linear-gradient(
+                    50deg,
+                    rgba(42, 123, 155, 1) 0%,
+                    rgba(107, 161, 255, 1) 100%
+                );
                 width: 2em;
                 height: 2em;
                 border-radius: 50%;
