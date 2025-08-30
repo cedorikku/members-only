@@ -8,11 +8,12 @@
     </head>
 
     <body>
-        <!-- prettier-ignore -->
         <%- include('./partials/navbar.ejs') %>
 
-        <% const anonPlaceholder = '∗'.repeat(8); %>
-        <% const isMember = ((currentUser?.role ?? 'guest') !== 'guest'); %>
+        <% 
+            const anonPlaceholder = '∗'.repeat(8);
+            const isMember = ((currentUser?.role ?? 'guest') !== 'guest'); 
+        %>
 
         <main id="posts" class="wrapper">
             <h1>Feed</h1>
@@ -31,11 +32,12 @@
             >
             <% } %>
 
-            <% if (locals.posts) { %>
-            <% posts.forEach(post => { %>
-            <% const username = (isMember) ? `${post.username}` : anonPlaceholder %>
-            <% const fullName = (isMember) ? `${post.firstname} ${post.lastname}` : anonPlaceholder %>
-            <% const createdAt = post.created_at.toDateString(); %>
+            <% if (locals.posts) {
+            posts.forEach(post => {
+            const username = (isMember) ? post.username : (post.username === locals.currentUser?.username) ? post.username : anonPlaceholder;
+            const fullName = (isMember) ? `${post.firstname} ${post.lastname}` : (post.username === locals.currentUser?.username) ? `${post.firstname} ${post.lastname}` : anonPlaceholder
+            const createdAt = post.created_at.toDateString();
+            %>
             <div class="post">
                 <div class="post-meta">
                     <div class="left">

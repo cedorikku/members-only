@@ -11,8 +11,10 @@
         <!-- prettier-ignore -->
         <%- include('../partials/navbar.ejs') %>
 
-        <% const anonPlaceholder = '∗'.repeat(8); %>
-        <% const isMember = ((currentUser?.role ?? 'guest') !== 'guest'); %>
+        <% 
+            const anonPlaceholder = '∗'.repeat(8);
+            const isMember = ((currentUser?.role ?? 'guest') !== 'guest'); 
+        %>
 
         <main id="posts" class="wrapper">
             <h1>Deleted</h1>
@@ -23,11 +25,12 @@
             </p>
             <% } %>
 
-            <% if (locals.posts) { %>
-            <% posts.forEach(post => { %>
-            <% const username = (isMember) ? `${post.username}` : anonPlaceholder %>
-            <% const fullName = (isMember) ? `${post.firstname} ${post.lastname}` : anonPlaceholder %>
-            <% const createdAt = post.created_at.toDateString(); %>
+            <% if (locals.posts) {
+            posts.forEach(post => {
+            const username = (isMember) ? `${post.username}` : anonPlaceholder
+            const fullName = (isMember) ? `${post.firstname} ${post.lastname}` : anonPlaceholder
+            const createdAt = post.created_at.toDateString(); 
+            %>
             <div class="post">
                 <% if (post.deleter) { %>
                 <div
